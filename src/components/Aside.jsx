@@ -14,7 +14,7 @@ export default function Aside({ isBack = false }) {
             <HiMiniArrowLeft className='text-3xl' />
           </Button>
         </Link>}
-        <Button rounded='full' title="Create Threads"><HiOutlinePlus className='text-3xl'/></Button>
+        <Link title='Create Thread' to="/create"><Button rounded='full' title="Create Threads"><HiOutlinePlus className='text-3xl'/></Button></Link>
         <Link title='Profile' to='/profile'><Avatar name='Febry Billiyagi' className={'w-12'}/></Link>
         <Button rounded='full' title="Logout"><TbLogout className='text-3xl'/></Button>
 	  </nav>

@@ -12,7 +12,7 @@ export default function ThreadItem() {
       <UserAvatatar name={'feb bill'}/>
 
       <div className='my-5'>
-        <Link className='font-semibold text-2xl'>How Does Assign Job To Others is so dificult?</Link>
+        <Link to={'/detail'} className='font-semibold text-2xl'>How Does Assign Job To Others is so dificult?</Link>
         <p className='text-gray-500 mt-3'>Im a product Officer and we wre thingking about moving to jakarta, indonesia. Especially at sudirman tower 2, in my opinion this is good opportunities for all of my products, so what do you say?</p>
       </div>
 

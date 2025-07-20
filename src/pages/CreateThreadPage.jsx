@@ -1,9 +1,8 @@
 import Layout from '../Layout'
-import ThreadItem from '../components/Threads/ThreadItem'
 import Aside from '../components/Aside'
-import Comments from '../components/Comments'
+import CreateThreadForm from '../components/CreateThreadForm'
 
-export default function DetailThreadPage() {
+export default function CreateThreadPage() {
   return (
     <Layout>
       <div className='grid grid-cols-12 gap-3 relative min-h-screen'>
@@ -11,8 +10,7 @@ export default function DetailThreadPage() {
           <Aside isBack/>
         </div>
         <div className='col-span-11 pt-5'>
-          <ThreadItem/>
-          <Comments/>
+          <CreateThreadForm/>
         </div>
       </div>
     </Layout>

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-export default function Button({ children, isLoading, rounded = 'default', title }) {
+export default function Button({ children, isLoading, rounded = 'default', title, className }) {
 
   const Loader = ({ children }) => (
     <div className='button-loading'>
@@ -11,7 +11,7 @@ export default function Button({ children, isLoading, rounded = 'default', title
 
   return (
     <button className={clsx(
-      'button-primary',
+      `button-primary ${className}`,
       rounded == 'full' && 'rounded-full py-2 px-2',
 	  rounded == 'default' && 'rounded-lg py-2 px-4'
     )} disabled={isLoading} title={title}>
