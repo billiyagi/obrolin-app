@@ -1,6 +1,7 @@
 import { login } from '../../api/auth'
 import { getOwnProfile } from '../../api/user'
 import { putAccessToken } from '../../utils/network-data'
+import Swal from 'sweetalert2'
 
 const ActionType = {
   SET_AUTH_USER: 'SET_AUTH_USER',
@@ -22,16 +23,19 @@ function unsetAuthUserActionCreator() {
   }
 }
 
-function asyncSetAuthUser({ id, password }) {
+function asyncSetAuthUser({ email, password }) {
   return async(dispatch) => {
     try {
-      const token = await login({ id, password })
-      putAccessToken(token)
+      const response = await login({ email, password })
+      putAccessToken(response.data.data.token)
       const authUser = await getOwnProfile()
 
-      dispatch(setAuthUserActionCreator(authUser))
+      dispatch(setAuthUserActionCreator(authUser.data.data.user))
     } catch (error) {
-      alert(error.message)
+      Swal.fire({
+        title: 'Error',
+        text: error.message
+      })
     }
   }
 }

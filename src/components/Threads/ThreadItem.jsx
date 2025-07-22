@@ -5,28 +5,40 @@ import Dislikes from './Dislikes'
 import Replies from './Replies'
 import { Dot } from 'lucide-react'
 import UserAvatatar from '../UserAvatatar'
+import { postedAt } from '../../utils'
+import { shortText } from '../../utils'
 
-export default function ThreadItem() {
+export default function ThreadItem({ id, title, body, topic, createdAt, upVotes, downVotes, user, totalComments, onUpVote, authUser }) {
+  console.log(authUser)
+  const isThreadUpVoted = upVotes.includes(authUser.id)
+
+  /** 
+   * TODO: Jadi logic untuk melakukan netrelize adalah:
+   * - ketika is thread up/down nya true, ketika klik tombol itu lagi
+   * - maka yang akan terjadi adalah menggunakan fungsi onNeutrilzeVote
+   * - untuk menghilangkan data user id pada up/down vote
+  */
+
   return (
     <article className='rounded-lg py-5 px-5 bg-white shadow mb-5'>
-      <UserAvatatar name={'feb bill'}/>
+      <UserAvatatar avatar={user.avatar} name={user.name}/>
 
       <div className='my-5'>
-        <Link to={'/detail'} className='font-semibold text-2xl'>How Does Assign Job To Others is so dificult?</Link>
-        <p className='text-gray-500 mt-3'>Im a product Officer and we wre thingking about moving to jakarta, indonesia. Especially at sudirman tower 2, in my opinion this is good opportunities for all of my products, so what do you say?</p>
+        <Link to={`/detail/${id}`} className='font-semibold text-2xl'>{title}</Link>
+        <p className='text-gray-500 mt-3'>{shortText(body, 15)}...</p>
       </div>
 
       <div className='flex justify-between text-gray-500'>
         <div className='flex '>
-          <Topic/>
+          <Topic name={topic}/>
           <Dot />
-          <p>7 Hour Ago</p>
+          <p>{postedAt(createdAt)}</p>
         </div>
 
         <div className='flex items-center gap-5'>
-          <Likes/>
-          <Dislikes/>
-          <Replies/>
+          <Likes likes={upVotes} onClick={() => onUpVote(id)} isLiked={isThreadUpVoted}/>
+          <Dislikes dislikes={downVotes}/>
+          <Replies totalComments={totalComments}/>
         </div>
       </div>
     </article>

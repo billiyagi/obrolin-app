@@ -2,21 +2,22 @@ import React from 'react'
 import Avatar from '../Avatar'
 import Dislikes from '../Threads/Dislikes'
 import Likes from '../Threads/Likes'
+import { postedAt } from '../../utils'
 
-export default function CommentItem() {
+export default function CommentItem({ id, content, createdAt, upVotes, downVotes, user }) {
   return (
-    <div className='flex gap-3 items-start'>
-	  <Avatar name={'slsk'}/>
-	  <div className='bg-white shadow p-5 rounded-lg'>
+    <div className='flex gap-3 items-start' data-id={id}>
+	  <Avatar image={user.avatar} name={user.name}/>
+	  <div className='bg-white shadow p-5 rounded-lg w-full'>
         <div className='flex gap-3 items-center justify-between mb-3'>
-          <div className='font-semibold'>Febry Billiyagi</div>
-          <div className='text-gray-400'>7 Hour Ago</div>
+          <div className='font-semibold'>{user.name}</div>
+          <div className='text-gray-400'>{postedAt(createdAt)}</div>
         </div>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga similique, saepe laudantium pariatur voluptatibus asperiores rem eum, itaque suscipit fugit voluptatum cupiditate officia unde libero esse expedita nesciunt dignissimos. Pariatur.</p>
+        <p>{content}</p>
 
         <div className='flex mt-5 gap-3'>
-          <Likes/>
-          <Dislikes/>
+          <Likes likes={upVotes}/>
+          <Dislikes dislikes={downVotes}/>
         </div>
       </div>
     </div>

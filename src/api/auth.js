@@ -6,8 +6,8 @@ async function login({ email, password }) {
     return await axios.post(
       ENDPOINTS.auth.login(),
       {
-        email,
-        password
+        email: email,
+        password: password
       },
       {
         headers: {
@@ -16,18 +16,14 @@ async function login({ email, password }) {
       }
     )
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message)
-    } else {
-      throw new Error('Unknown error occurred')
-    }
+    throw new Error(error.response.data.message)
   }
 }
 
 async function register({ name, email, password }) {
   try {
     return await axios.post(
-      ENDPOINTS.auth.login(),
+      ENDPOINTS.auth.register(),
       {
         name,
         email,
@@ -40,11 +36,7 @@ async function register({ name, email, password }) {
       }
     )
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message)
-    } else {
-      throw new Error('Unknown error occurred')
-    }
+    throw new Error(error.response.data.message)
   }
 }
 

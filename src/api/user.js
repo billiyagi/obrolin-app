@@ -1,5 +1,5 @@
 import ENDPOINTS from './endpoints'
-import { fetchWithAuth } from '@/utils/network-data'
+import { fetchWithAuth } from '../utils/network-data'
 
 async function getOwnProfile() {
   return await fetchWithAuth({

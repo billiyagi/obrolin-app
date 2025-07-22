@@ -1,21 +1,38 @@
 import Layout from '../Layout'
-import Input from '../components/ui/Input'
-import { Link } from 'react-router'
-import Button from '../components/ui/Button'
+import RegisterForm from '../components/RegisterForm'
+import { useDispatch } from 'react-redux'
+import { asyncRegisterUser } from '../states/user/action'
+import { useNavigate } from 'react-router'
+import Swal from 'sweetalert2'
 
 export default function RegisterPage() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  
+
+  const handleRegister = async({ name, email, password }) => {
+    const register = await dispatch(asyncRegisterUser({ name, email, password }))
+    if(register.status) {
+      Swal.fire({
+        title: 'Success',
+        text: 'Account Successfully Registered',
+        icon: 'success'
+      })
+      navigate('/login')
+    } else {
+      Swal.fire({
+        title: 'Failed',
+        text: register.message,
+        icon: 'error'
+      })
+    }
+  }
+
   return (
     <Layout>
-	  <div className='w-1/2 mx-auto bg-white p-5 rounded-lg shadow mt-10 mb-20'>
-        <div className='mb-5 text-2xl font-semibold'>Register new account</div>
-	  	<Input className="mb-3" label="Nama" id="name" type="name"/>
-	  	<Input className="mb-3" label="Email" id="email" type="email"/>
-	  	<Input className="mb-5" label="Password" id="password" type="password"/>
-        <div className="flex justify-between items-center">
-          <div>Sudah punya akun? <Link to='/login' className='text-blue-600'>Login disini</Link></div>
-		  <Button>Register</Button>
-        </div>
-	  </div>
+      <div className='w-1/2 mx-auto bg-white p-5 rounded-lg shadow mt-10 mb-20'>
+        <RegisterForm handleRegister={handleRegister}/>
+      </div>
     </Layout>
   )
 }

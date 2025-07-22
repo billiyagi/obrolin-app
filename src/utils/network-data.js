@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-function putAccessToken() {
+function putAccessToken(token) {
   localStorage.setItem('accessToken', token)
 }
 
@@ -21,7 +21,8 @@ async function fetchWithAuth({ url, method, data, options = {} }) {
       ...options,
       headers: {
         ...options.headers,
-        Authorization: `Bearer ${getAccessToken()}`
+        Authorization: `Bearer ${getAccessToken()}`,
+        'Content-Type': 'application/json'
       }
     })
   } catch (error) {
