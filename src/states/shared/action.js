@@ -8,8 +8,16 @@ function asyncPopulateThreadsAndUsers() {
     try {
       const threads = await getAllThreads()
       const users = await getAllUsers()
+
+      const result = threads.data.data.threads.map((thread) => {
+        return {
+          ...thread,
+          user: users.data.data.users.find((user) => user.id == thread.ownerId),
+        }
+      })
+
       dispatch(receiveUserActionCreator(users.data.data.users))
-      dispatch(receiveThreadsActionCreator(threads.data.data.threads))
+      dispatch(receiveThreadsActionCreator({ threads: result }))
 
       return {
         status: true,

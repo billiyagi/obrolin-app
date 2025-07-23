@@ -10,22 +10,15 @@ import { asyncToggleUpVoteThread, asyncToggleDownVoteThread, asyncToggleNeutrali
 
 export default function HomePage() {
 
-  const threads = useSelector((state) => state.threads)
-  const users = useSelector((state) => state.user)
-  const authUser =useSelector((state) => state.authUser)
+  const { threads } = useSelector((state) => state.threads)
+  const authUser = useSelector((state) => state.authUser)
+  console.log('authUser', authUser)
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
     dispatch(asyncPopulateThreadsAndUsers())
   }, [dispatch])
-
-  const threadList = threads.map((thread) => {
-    return {
-      ...thread,
-      user: users.find((user) => user.id == thread.ownerId),
-      authUser: authUser.id
-    }
-  })
+  
 
   const onUpVote = (threadId) => {
     dispatch(asyncToggleUpVoteThread(threadId))
@@ -46,7 +39,7 @@ export default function HomePage() {
           <Aside/>
         </div>
         <div className='col-span-7 pt-5'>
-          <Threads threads={threadList} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralizeVote={onNeutralize} authUser={authUser}/>
+          <Threads threads={threads} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralizeVote={onNeutralize} authUser={authUser}/>
         </div>
         <div className='col-span-4 flex flex-col gap-3 sticky top-0 h-fit pt-5'>
           <Leaderboards/>

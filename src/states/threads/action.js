@@ -69,7 +69,7 @@ function asyncDetailThread(threadId) {
   return async(dispatch) => {
     try {
       const thread = await getThreadById(threadId)
-      dispatch(detailThreadActionCreator({ thread: thread.data.data }))
+      dispatch(detailThreadActionCreator({ detail: thread.data.data.detailThread }))
     } catch (error) {
       throw Error(error)
     }
@@ -98,7 +98,7 @@ function asyncReceiveThreads() {
   return async(dispatch) => {
     try {
       const threads = await getAllThreads()
-      dispatch(receiveThreadsActionCreator(threads.data))
+      dispatch(receiveThreadsActionCreator({ threads: threads.data }))
       return {
         status: true,
         message: 'Received threads'
