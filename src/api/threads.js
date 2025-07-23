@@ -25,4 +25,18 @@ async function toggleUpVoteThread(id) {
   })
 }
 
-export { getAllThreads, getThreadById, createThread, toggleUpVoteThread }
+async function toggleDownVoteThread(id) {
+  return await fetchWithAuth({
+    url: ENDPOINTS.votes.down(id),
+    method: 'POST',
+  })
+}
+
+async function toggleNeutralizeVoteThread(id) {
+  return await fetchWithAuth({
+    url: ENDPOINTS.votes.neutral(id),
+    method: 'POST',
+  })
+}
+
+export { getAllThreads, getThreadById, createThread, toggleUpVoteThread, toggleDownVoteThread, toggleNeutralizeVoteThread }

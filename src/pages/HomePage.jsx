@@ -6,7 +6,7 @@ import PopularTopics from '../components/PopularTopics'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { asyncPopulateThreadsAndUsers } from '../states/shared/action'
-import { asyncToggleUpVoteThread } from '../states/threads/action'
+import { asyncToggleUpVoteThread, asyncToggleDownVoteThread, asyncToggleNeutralizeVoteThread } from '../states/threads/action'
 
 export default function HomePage() {
 
@@ -30,6 +30,14 @@ export default function HomePage() {
   const onUpVote = (threadId) => {
     dispatch(asyncToggleUpVoteThread(threadId))
   }
+  
+  const onDownVote = (threadId) => {
+    dispatch(asyncToggleDownVoteThread(threadId))
+  }
+
+  const onNeutralize = (threadId) => {
+    dispatch(asyncToggleNeutralizeVoteThread(threadId))
+  }
 
   return (
     <Layout>
@@ -38,7 +46,7 @@ export default function HomePage() {
           <Aside/>
         </div>
         <div className='col-span-7 pt-5'>
-          <Threads threads={threadList} onUpVote={onUpVote} authUser={authUser}/>
+          <Threads threads={threadList} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralizeVote={onNeutralize} authUser={authUser}/>
         </div>
         <div className='col-span-4 flex flex-col gap-3 sticky top-0 h-fit pt-5'>
           <Leaderboards/>
