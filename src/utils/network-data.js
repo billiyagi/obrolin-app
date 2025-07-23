@@ -26,7 +26,8 @@ async function fetchWithAuth({ url, method, data, options = {} }) {
       }
     })
   } catch (error) {
-    throw new Error(error.message)
+    console.log(error)
+    throw new Error(error)
   }
 }
 

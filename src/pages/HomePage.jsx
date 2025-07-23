@@ -12,7 +12,6 @@ export default function HomePage() {
 
   const { threads } = useSelector((state) => state.threads)
   const authUser = useSelector((state) => state.authUser)
-  console.log('authUser', authUser)
   const dispatch = useDispatch()
   
   useEffect(() => {

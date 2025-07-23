@@ -3,8 +3,14 @@ import Avatar from '../Avatar'
 import Dislikes from '../Threads/Dislikes'
 import Likes from '../Threads/Likes'
 import { postedAt } from '../../utils'
+import { useSelector } from 'react-redux'
 
-export default function CommentItem({ id, content, createdAt, upVotes, downVotes, user }) {
+export default function CommentItem({ id, threadId, content, createdAt, upVotes, downVotes, user, onDownVote, onUpVote, onNeutralizeVote }) {
+
+  const authUser = useSelector((state) => state.authUser)
+  const isDisliked = downVotes.includes(authUser.id)
+  const isLiked = upVotes.includes(authUser.id)
+
   return (
     <div className='flex gap-3 items-start' data-id={id}>
 	  <Avatar image={user.avatar} name={user.name}/>
@@ -16,8 +22,8 @@ export default function CommentItem({ id, content, createdAt, upVotes, downVotes
         <p>{content}</p>
 
         <div className='flex mt-5 gap-3'>
-          <Likes likes={upVotes}/>
-          <Dislikes dislikes={downVotes}/>
+          <Likes likes={upVotes} isLiked={isLiked} onClick={() => isLiked ?  onNeutralizeVote(threadId, id) : onUpVote(threadId, id)}/>
+          <Dislikes dislikes={downVotes} isDisliked={isDisliked} onClick={() => isDisliked ? onNeutralizeVote(threadId, id) : onDownVote(threadId, id)}/>
         </div>
       </div>
     </div>

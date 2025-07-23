@@ -11,6 +11,7 @@ async function getThreadById(threadId) {
 }
 
 async function createThread({ title, body, category }) {
+  console.log({ title, body, category })
   return await fetchWithAuth({
     url: ENDPOINTS.threads.create(),
     method: 'POST',

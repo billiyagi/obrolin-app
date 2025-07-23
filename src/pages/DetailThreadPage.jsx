@@ -7,7 +7,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { asyncDetailThread } from '../states/threads/action'
 import { useEffect } from 'react'
 import { asyncToggleUpVoteThread, asyncToggleDownVoteThread, asyncToggleNeutralizeVoteThread } from '../states/threads/action'
-import ThreadLoading from '../components/Skeleton/ThreadLoading'
+import DetailThreadLoading from '../components/Skeleton/DetailThreadLoading'
+import { asyncAddComment, asyncToggleDownCommentThread, asyncToggleUpCommentThread, asyncToggleNeutralizeCommentThread } from '../states/threads/action'
 
 
 export default function DetailThreadPage() {
@@ -32,6 +33,22 @@ export default function DetailThreadPage() {
     dispatch(asyncToggleNeutralizeVoteThread(threadId))
   }
 
+  const onCreateComment = (comment, threadId) => {
+    dispatch(asyncAddComment({ content: comment, threadId: threadId }))
+  }
+
+  const onDownVoteComment = (threadId, commentId) => {
+    dispatch(asyncToggleDownCommentThread({ threadId, commentId }))
+  }
+
+  const onUpVoteComment = (threadId, commentId) => {
+    dispatch(asyncToggleUpCommentThread({ threadId, commentId }))
+  }
+
+  const onNeutralizeComment = (threadId, commentId) => {
+    dispatch(asyncToggleNeutralizeCommentThread({ threadId, commentId }))
+  }
+
   return (
     <Layout>
       <div className='grid grid-cols-12 gap-3 relative min-h-screen'>
@@ -40,9 +57,10 @@ export default function DetailThreadPage() {
         </div>
         <div className='col-span-11 pt-5'>
           {thread ? <>
-            <ThreadItem key={thread.id} id={thread.id} title={thread.title} body={thread.body} topic={thread.category} createdAt={thread.createdAt} upVotes={thread.upVotesBy} downVotes={thread.downVotesBy} user={thread.owner} authUser={authUser} onDownVote={onDownVote} onUpVote={onUpVote} onNeutralize={onNeutralize}/>
-            <Comments comments={thread.comments}/>
-          </> : <>Oops Something wrong</>}
+            <ThreadItem key={thread.id} id={thread.id} title={thread.title} body={thread.body} topic={thread.category} createdAt={thread.createdAt} upVotes={thread.upVotesBy} downVotes={thread.downVotesBy} user={thread.owner} authUser={authUser} onDownVote={onDownVote} onUpVote={onUpVote} onNeutralize={onNeutralize} totalComments={thread.comments.length}/>
+
+            <Comments comments={thread.comments} onCreateComment={onCreateComment} threadId={thread.id} onDownVoteComment={onDownVoteComment} onUpVoteComment={onUpVoteComment} onNeutralizeComment={onNeutralizeComment}/>
+          </> : <DetailThreadLoading/>}
           
         </div>
       </div>
