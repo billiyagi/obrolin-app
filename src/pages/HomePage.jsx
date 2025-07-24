@@ -8,16 +8,19 @@ import { useEffect } from 'react'
 import { asyncPopulateThreadsAndUsers } from '../states/shared/action'
 import { asyncToggleUpVoteThread, asyncToggleDownVoteThread, asyncToggleNeutralizeVoteThread, unsetSelectTopics } from '../states/threads/action'
 import { setSelectTopics } from '../states/threads/action'
+import { asyncReceiveLeaderboards } from '../states/leaderboards/action'
 
 export default function HomePage() {
 
   const { threads } = useSelector((state) => state.threads)
   const authUser = useSelector((state) => state.authUser)
   const availableTopics = useSelector((state) => state.topics)
+  const leaderboards = useSelector((state) => state.leaderboards)
   const dispatch = useDispatch()
   
   useEffect(() => {
     dispatch(asyncPopulateThreadsAndUsers())
+    dispatch(asyncReceiveLeaderboards())
   }, [dispatch])
   
 
@@ -33,14 +36,6 @@ export default function HomePage() {
     dispatch(asyncToggleNeutralizeVoteThread(threadId))
   }
 
-
-  /** 
-   * *Logicc
-   * - ketika pertama kali diakses, pada reducernya yaitu membuat sebuah array dengan per objectnya 
-   * begini: {topic: 'perkenalan', isSelected: true}
-   * 
-   * lalu ketika melakukan aksi onselect, maka rubah thread sesuai topicnya
-  */
   const onSelectTopic = (topics, isAlreadySelected) => {
     if(isAlreadySelected) {
       dispatch(unsetSelectTopics())
@@ -69,8 +64,8 @@ export default function HomePage() {
           <Threads threads={threadsList} onUpVote={onUpVote} onDownVote={onDownVote} onNeutralizeVote={onNeutralize} authUser={authUser}/>
         </div>
         <div className='col-span-4 flex flex-col gap-3 sticky top-0 h-fit pt-5'>
-          <Leaderboards/>
-          {availableTopics && <PopularTopics topics={availableTopics} onSelectTopic={onSelectTopic}/>}
+          <Leaderboards leaderboards={leaderboards}/>
+          <PopularTopics topics={availableTopics} onSelectTopic={onSelectTopic}/>
         </div>
       </div>
     </Layout>
