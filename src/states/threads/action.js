@@ -1,5 +1,6 @@
 import { getAllThreads, getThreadById, createThread, toggleUpVoteThread, toggleDownVoteThread, toggleNeutralizeVoteThread } from '../../api/threads'
 import { createComment, upVoteComment, downVoteComment, neutralizeVoteComment } from '../../api/comment'
+import { showLoading, hideLoading } from '@dimasmds/react-redux-loading-bar'
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
   ADD_THREAD: 'ADD_THREAD',
@@ -155,10 +156,10 @@ function setAvailableTopics({ topics }) {
 
 function asyncAddComment({ content, threadId }){
   return async(dispatch) => {
+    dispatch(showLoading())
     try {      
       const comment = await createComment({ content, threadId })
       dispatch(addCommentActionCreator({ threadId, comment: comment.data.data.comment }))
-
       return {
         status: true,
         message: 'Successfully add new commment'
@@ -168,23 +169,29 @@ function asyncAddComment({ content, threadId }){
         status: true,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
 
 function asyncDetailThread(threadId) {
   return async(dispatch) => {
+    dispatch(showLoading())
     try {
       const thread = await getThreadById(threadId)
       dispatch(detailThreadActionCreator({ detail: thread.data.data.detailThread }))
     } catch (error) {
       throw Error(error)
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
 
 function asyncAddThreads({ title, body, category }) {
   return async(dispatch) => {
+    dispatch(showLoading())
     try {
       const thread = await createThread({ title, body, category })
       dispatch(addThreadsActionCreator(thread.data.data.thread))
@@ -197,12 +204,15 @@ function asyncAddThreads({ title, body, category }) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
 
 function asyncReceiveThreads() {
   return async(dispatch) => {
+    dispatch(showLoading())
     try {
       const threads = await getAllThreads()
       dispatch(receiveThreadsActionCreator({ threads: threads.data }))
@@ -215,6 +225,8 @@ function asyncReceiveThreads() {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
@@ -223,6 +235,7 @@ function asyncToggleUpVoteThread(threadId) {
   return async(dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }))
+    dispatch(showLoading())
 
     try {
       await toggleUpVoteThread(threadId)
@@ -232,6 +245,8 @@ function asyncToggleUpVoteThread(threadId) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
@@ -240,6 +255,7 @@ function asyncToggleDownVoteThread(threadId) {
   return async(dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleDownVoteThreadActionCreator({ threadId, userId: authUser.id }))
+    dispatch(showLoading())
 
     try {
       await toggleDownVoteThread(threadId)
@@ -249,6 +265,8 @@ function asyncToggleDownVoteThread(threadId) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
@@ -257,7 +275,7 @@ function asyncToggleNeutralizeVoteThread(threadId) {
   return async(dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleNeutralizeVoteThreadActionCreator({ threadId, userId: authUser.id }))
-
+    dispatch(showLoading())
     try {
       await toggleNeutralizeVoteThread(threadId)
     } catch(error) {
@@ -266,6 +284,8 @@ function asyncToggleNeutralizeVoteThread(threadId) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
@@ -274,6 +294,7 @@ function asyncToggleUpCommentThread({ threadId, commentId }) {
   return async(dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleUpCommentActionCreator({ threadId, commentId, userId: authUser.id }))
+    dispatch(showLoading())
 
     try {
       await upVoteComment({ threadId, commentId })
@@ -283,6 +304,8 @@ function asyncToggleUpCommentThread({ threadId, commentId }) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
@@ -292,7 +315,7 @@ function asyncToggleDownCommentThread({ threadId, commentId }) {
   return async(dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleDownCommentActionCreator({ threadId, commentId, userId: authUser.id }))
-
+    dispatch(showLoading())
     try {
       await downVoteComment({ threadId, commentId })
     } catch(error) {
@@ -301,6 +324,8 @@ function asyncToggleDownCommentThread({ threadId, commentId }) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }
@@ -309,6 +334,7 @@ function asyncToggleNeutralizeCommentThread({ threadId, commentId }) {
   return async(dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleNeutralizeCommentActionCreator({ threadId, commentId, userId: authUser.id }))
+    dispatch(showLoading())
 
     try {
       await neutralizeVoteComment({ threadId, commentId })
@@ -318,6 +344,8 @@ function asyncToggleNeutralizeCommentThread({ threadId, commentId }) {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }

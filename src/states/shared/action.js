@@ -3,9 +3,11 @@ import { getAllUsers } from '../../api/user'
 import { receiveUserActionCreator } from '../user/action'
 import { receiveThreadsActionCreator } from '../threads/action'
 import { setAvailableTopics } from '../threads/action'
+import { showLoading, hideLoading } from '@dimasmds/react-redux-loading-bar'
 
 function asyncPopulateThreadsAndUsers() {
   return async(dispatch) => {
+    dispatch(showLoading())
     try {
       const threads = await getAllThreads()
       const users = await getAllUsers()
@@ -48,6 +50,8 @@ function asyncPopulateThreadsAndUsers() {
         status: false,
         message: error.message
       }
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }

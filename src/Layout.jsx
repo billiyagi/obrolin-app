@@ -1,14 +1,16 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Loading from './components/Loading'
 
 export default function Layout({ children }) {
   return (
     <>
-	  <Header/>
-	  <main className='container-app'>
+      <Loading/>
+      <Header/>
+      <main className='container-app'>
         {children}
-	  </main>
-	  <Footer/>
+      </main>
+      <Footer/>
     </>
   )
 }

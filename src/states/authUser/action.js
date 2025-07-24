@@ -1,7 +1,7 @@
 import { login } from '../../api/auth'
 import { getOwnProfile } from '../../api/user'
 import { putAccessToken } from '../../utils/network-data'
-import Swal from 'sweetalert2'
+import { showLoading, hideLoading } from '@dimasmds/react-redux-loading-bar'
 
 const ActionType = {
   SET_AUTH_USER: 'SET_AUTH_USER',
@@ -25,6 +25,7 @@ function unsetAuthUserActionCreator() {
 
 function asyncSetAuthUser({ email, password }) {
   return async(dispatch) => {
+    dispatch(showLoading())
     try {
       const response = await login({ email, password })
       putAccessToken(response.data.data.token)
@@ -32,10 +33,9 @@ function asyncSetAuthUser({ email, password }) {
 
       dispatch(setAuthUserActionCreator(authUser.data.data.user))
     } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: error.message
-      })
+      console.log(error)
+    } finally {
+      dispatch(hideLoading())
     }
   }
 }

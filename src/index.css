@@ -4,6 +4,11 @@
 	--primary: #4D4AE8;
 }
 
+.loading {
+  position: sticky;
+  top: 0;
+}
+
 .loader {
 width: 22px;
 height: 22px;
