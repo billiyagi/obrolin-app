@@ -11,6 +11,34 @@ const ActionType = {
   TOGGLE_DOWN_VOTE_COMMENT: 'TOGGLE_DOWN_VOTE_COMMENT',
   TOGGLE_NEUTRALIZE_VOTE_COMMENT: 'TOGGLE_NEUTRALIZE_VOTE_COMMENT',
   ADD_COMMENT: 'ADD_COMMENT',
+  SET_SELECT_TOPIC: 'SET_SELECT_TOPIC',
+  UNSET_SELECT_TOPIC: 'UNSET_SELECT_TOPIC',
+  SET_AVAILABLE_TOPICS: 'SET_AVAILABLE_TOPICS',
+}
+
+
+function setAvailableTopicsActionCreator({ topics }) {
+  return {
+    type: ActionType.SET_AVAILABLE_TOPICS,
+    payload: {
+      topics,
+    },
+  }
+}
+
+function setSelectTopicsActionCreator({ topics }) {
+  return {
+    type: ActionType.SET_SELECT_TOPIC,
+    payload: {
+      topics,
+    },
+  }
+}
+
+function unsetSelectTopicsActionCreator() {
+  return {
+    type: ActionType.UNSET_SELECT_TOPIC
+  }
 }
 
 function toggleDownCommentActionCreator({ threadId, commentId, userId }) {
@@ -110,6 +138,18 @@ function addCommentActionCreator({ threadId, comment }) {
       threadId,
       comment
     }
+  }
+}
+
+function setSelectTopics({ topics }) {
+  return (dispatch) => {
+    dispatch(setSelectTopicsActionCreator({ topics }))
+  }
+}
+
+function setAvailableTopics({ topics }) {
+  return (dispatch) => {
+    dispatch(setAvailableTopicsActionCreator({ topics }))
   }
 }
 
@@ -282,4 +322,10 @@ function asyncToggleNeutralizeCommentThread({ threadId, commentId }) {
   }
 }
 
-export { receiveThreadsActionCreator, addThreadsActionCreator, asyncAddThreads, asyncReceiveThreads, asyncDetailThread, ActionType, asyncToggleUpVoteThread, asyncToggleDownVoteThread,asyncToggleNeutralizeVoteThread, addCommentActionCreator, asyncAddComment, asyncToggleUpCommentThread, asyncToggleDownCommentThread, asyncToggleNeutralizeCommentThread, toggleUpCommentActionCreator, toggleDownCommentActionCreator, toggleNeutralizeCommentActionCreator }
+function unsetSelectTopics() {
+  return (dispatch) => {
+    dispatch(unsetSelectTopicsActionCreator())
+  }
+}
+
+export { receiveThreadsActionCreator, addThreadsActionCreator, asyncAddThreads, asyncReceiveThreads, asyncDetailThread, ActionType, asyncToggleUpVoteThread, asyncToggleDownVoteThread,asyncToggleNeutralizeVoteThread, addCommentActionCreator, asyncAddComment, asyncToggleUpCommentThread, asyncToggleDownCommentThread, asyncToggleNeutralizeCommentThread, toggleUpCommentActionCreator, toggleDownCommentActionCreator, toggleNeutralizeCommentActionCreator, setSelectTopics, setAvailableTopics, unsetSelectTopicsActionCreator, unsetSelectTopics }
