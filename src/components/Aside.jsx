@@ -10,9 +10,11 @@ export default function Aside({ isBack = false }) {
   return (
     <aside>
 	  <nav className='flex flex-col justify-center items-center gap-3'>
-        {isBack && <Button rounded='full'>
-          <HiMiniArrowLeft className='text-3xl' />
-        </Button>}
+        {isBack && <Link title='Back' to='/'>
+          <Button rounded='full'>
+            <HiMiniArrowLeft className='text-3xl' />
+          </Button>
+        </Link>}
         <Link title='Create Thread' to="/create"><Button rounded='full' title="Create Threads"><HiOutlinePlus className='text-3xl'/></Button></Link>
         <ProfileButton/>
         <LogoutButton/>
