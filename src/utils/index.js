@@ -1,4 +1,4 @@
-function postedAt(date) {
+function postedAt (date) {
   const now = new Date()
   const posted = new Date(date)
   const diff = now - posted
@@ -19,14 +19,13 @@ function postedAt(date) {
   return 'just now'
 }
 
-function removeHtmlTags(text) {
+function removeHtmlTags (text) {
   return text.replace(/(<([^>]+)>)/gi, '')
 }
 
-function shortText(text, word = 5) {
+function shortText (text, word = 5) {
   const parsed = removeHtmlTags(text)
   return parsed.split(' ').slice(0, word).join(' ')
 }
-
 
 export { postedAt, removeHtmlTags, shortText }

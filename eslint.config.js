@@ -17,9 +17,9 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: {
         ecmaFeatures: {
-          jsx: true,
-        },
-      },
+          jsx: true
+        }
+      }
     },
     plugins: {
       import: pluginImport,
@@ -27,15 +27,15 @@ export default defineConfig([
       promise: pluginPromise,
       react: pluginReact,
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefresh
     },
     rules: {
       // Imitate StandardJS rules
       'no-var': 'error',
       'prefer-const': 'error',
-      'semi': ['error', 'never'],
-      'quotes': ['error', 'single'],
-      'indent': ['error', 2],
+      semi: ['error', 'never'],
+      quotes: ['error', 'single'],
+      indent: ['error', 2],
       'comma-dangle': ['error', 'only-multiline'],
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'space-before-function-paren': ['error', 'never'],
@@ -45,12 +45,12 @@ export default defineConfig([
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react/react-in-jsx-scope': 'off',
-      'react-refresh/only-export-components': 'warn',
+      'react-refresh/only-export-components': 'warn'
     },
     settings: {
       react: {
-        version: 'detect',
-      },
-    },
-  },
+        version: 'detect'
+      }
+    }
+  }
 ])

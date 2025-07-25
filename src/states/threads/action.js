@@ -14,35 +14,34 @@ const ActionType = {
   ADD_COMMENT: 'ADD_COMMENT',
   SET_SELECT_TOPIC: 'SET_SELECT_TOPIC',
   UNSET_SELECT_TOPIC: 'UNSET_SELECT_TOPIC',
-  SET_AVAILABLE_TOPICS: 'SET_AVAILABLE_TOPICS',
+  SET_AVAILABLE_TOPICS: 'SET_AVAILABLE_TOPICS'
 }
 
-
-function setAvailableTopicsActionCreator({ topics }) {
+function setAvailableTopicsActionCreator ({ topics }) {
   return {
     type: ActionType.SET_AVAILABLE_TOPICS,
     payload: {
-      topics,
-    },
+      topics
+    }
   }
 }
 
-function setSelectTopicsActionCreator({ topics }) {
+function setSelectTopicsActionCreator ({ topics }) {
   return {
     type: ActionType.SET_SELECT_TOPIC,
     payload: {
-      topics,
-    },
+      topics
+    }
   }
 }
 
-function unsetSelectTopicsActionCreator() {
+function unsetSelectTopicsActionCreator () {
   return {
     type: ActionType.UNSET_SELECT_TOPIC
   }
 }
 
-function toggleDownCommentActionCreator({ threadId, commentId, userId }) {
+function toggleDownCommentActionCreator ({ threadId, commentId, userId }) {
   return {
     type: ActionType.TOGGLE_DOWN_VOTE_COMMENT,
     payload: {
@@ -53,7 +52,7 @@ function toggleDownCommentActionCreator({ threadId, commentId, userId }) {
   }
 }
 
-function toggleUpCommentActionCreator({ threadId, commentId, userId }) {
+function toggleUpCommentActionCreator ({ threadId, commentId, userId }) {
   return {
     type: ActionType.TOGGLE_UP_VOTE_COMMENT,
     payload: {
@@ -64,7 +63,7 @@ function toggleUpCommentActionCreator({ threadId, commentId, userId }) {
   }
 }
 
-function toggleNeutralizeCommentActionCreator({ threadId, commentId, userId }) {
+function toggleNeutralizeCommentActionCreator ({ threadId, commentId, userId }) {
   return {
     type: ActionType.TOGGLE_NEUTRALIZE_VOTE_COMMENT,
     payload: {
@@ -75,7 +74,7 @@ function toggleNeutralizeCommentActionCreator({ threadId, commentId, userId }) {
   }
 }
 
-function toggleNeutralizeVoteThreadActionCreator({ threadId, userId }) {
+function toggleNeutralizeVoteThreadActionCreator ({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_NEUTRALIZE_VOTE_THREAD,
     payload: {
@@ -85,7 +84,7 @@ function toggleNeutralizeVoteThreadActionCreator({ threadId, userId }) {
   }
 }
 
-function toggleUpVoteThreadActionCreator({ threadId, userId }) {
+function toggleUpVoteThreadActionCreator ({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_UP_VOTE_THREAD,
     payload: {
@@ -95,7 +94,7 @@ function toggleUpVoteThreadActionCreator({ threadId, userId }) {
   }
 }
 
-function toggleDownVoteThreadActionCreator({ threadId, userId }) {
+function toggleDownVoteThreadActionCreator ({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_DOWN_VOTE_THREAD,
     payload: {
@@ -105,7 +104,7 @@ function toggleDownVoteThreadActionCreator({ threadId, userId }) {
   }
 }
 
-function receiveThreadsActionCreator(threads) {
+function receiveThreadsActionCreator (threads) {
   return {
     type: ActionType.RECEIVE_THREADS,
     payload: {
@@ -114,7 +113,7 @@ function receiveThreadsActionCreator(threads) {
   }
 }
 
-function addThreadsActionCreator(threads) {
+function addThreadsActionCreator (threads) {
   return {
     type: ActionType.ADD_THREAD,
     payload: {
@@ -123,7 +122,7 @@ function addThreadsActionCreator(threads) {
   }
 }
 
-function detailThreadActionCreator(threads) {
+function detailThreadActionCreator (threads) {
   return {
     type: ActionType.DETAIL_THREAD,
     payload: {
@@ -132,7 +131,7 @@ function detailThreadActionCreator(threads) {
   }
 }
 
-function addCommentActionCreator({ threadId, comment }) {
+function addCommentActionCreator ({ threadId, comment }) {
   return {
     type: ActionType.ADD_COMMENT,
     payload: {
@@ -142,29 +141,29 @@ function addCommentActionCreator({ threadId, comment }) {
   }
 }
 
-function setSelectTopics({ topics }) {
+function setSelectTopics ({ topics }) {
   return (dispatch) => {
     dispatch(setSelectTopicsActionCreator({ topics }))
   }
 }
 
-function setAvailableTopics({ topics }) {
+function setAvailableTopics ({ topics }) {
   return (dispatch) => {
     dispatch(setAvailableTopicsActionCreator({ topics }))
   }
 }
 
-function asyncAddComment({ content, threadId }){
-  return async(dispatch) => {
+function asyncAddComment ({ content, threadId }) {
+  return async (dispatch) => {
     dispatch(showLoading())
-    try {      
+    try {
       const comment = await createComment({ content, threadId })
       dispatch(addCommentActionCreator({ threadId, comment: comment.data.data.comment }))
       return {
         status: true,
         message: 'Successfully add new commment'
       }
-    } catch(error) {
+    } catch (error) {
       return {
         status: true,
         message: error.message
@@ -175,8 +174,8 @@ function asyncAddComment({ content, threadId }){
   }
 }
 
-function asyncDetailThread(threadId) {
-  return async(dispatch) => {
+function asyncDetailThread (threadId) {
+  return async (dispatch) => {
     dispatch(showLoading())
     try {
       const thread = await getThreadById(threadId)
@@ -189,8 +188,8 @@ function asyncDetailThread(threadId) {
   }
 }
 
-function asyncAddThreads({ title, body, category }) {
-  return async(dispatch) => {
+function asyncAddThreads ({ title, body, category }) {
+  return async (dispatch) => {
     dispatch(showLoading())
     try {
       const thread = await createThread({ title, body, category })
@@ -199,7 +198,7 @@ function asyncAddThreads({ title, body, category }) {
         status: true,
         message: 'Successfuly create new thread'
       }
-    } catch(error) {
+    } catch (error) {
       return {
         status: false,
         message: error.message
@@ -210,8 +209,8 @@ function asyncAddThreads({ title, body, category }) {
   }
 }
 
-function asyncReceiveThreads() {
-  return async(dispatch) => {
+function asyncReceiveThreads () {
+  return async (dispatch) => {
     dispatch(showLoading())
     try {
       const threads = await getAllThreads()
@@ -220,7 +219,7 @@ function asyncReceiveThreads() {
         status: true,
         message: 'Received threads'
       }
-    } catch(error) {
+    } catch (error) {
       return {
         status: false,
         message: error.message
@@ -231,15 +230,15 @@ function asyncReceiveThreads() {
   }
 }
 
-function asyncToggleUpVoteThread(threadId) {
-  return async(dispatch, getState) => {
+function asyncToggleUpVoteThread (threadId) {
+  return async (dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }))
     dispatch(showLoading())
 
     try {
       await toggleUpVoteThread(threadId)
-    } catch(error) {
+    } catch (error) {
       dispatch(toggleUpVoteThreadActionCreator({ threadId, userId: authUser.id }))
       return {
         status: false,
@@ -251,15 +250,15 @@ function asyncToggleUpVoteThread(threadId) {
   }
 }
 
-function asyncToggleDownVoteThread(threadId) {
-  return async(dispatch, getState) => {
+function asyncToggleDownVoteThread (threadId) {
+  return async (dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleDownVoteThreadActionCreator({ threadId, userId: authUser.id }))
     dispatch(showLoading())
 
     try {
       await toggleDownVoteThread(threadId)
-    } catch(error) {
+    } catch (error) {
       dispatch(toggleDownVoteThreadActionCreator({ threadId, userId: authUser.id }))
       return {
         status: false,
@@ -271,14 +270,14 @@ function asyncToggleDownVoteThread(threadId) {
   }
 }
 
-function asyncToggleNeutralizeVoteThread(threadId) {
-  return async(dispatch, getState) => {
+function asyncToggleNeutralizeVoteThread (threadId) {
+  return async (dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleNeutralizeVoteThreadActionCreator({ threadId, userId: authUser.id }))
     dispatch(showLoading())
     try {
       await toggleNeutralizeVoteThread(threadId)
-    } catch(error) {
+    } catch (error) {
       dispatch(toggleNeutralizeVoteThreadActionCreator({ threadId, userId: authUser.id }))
       return {
         status: false,
@@ -290,15 +289,15 @@ function asyncToggleNeutralizeVoteThread(threadId) {
   }
 }
 
-function asyncToggleUpCommentThread({ threadId, commentId }) {
-  return async(dispatch, getState) => {
+function asyncToggleUpCommentThread ({ threadId, commentId }) {
+  return async (dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleUpCommentActionCreator({ threadId, commentId, userId: authUser.id }))
     dispatch(showLoading())
 
     try {
       await upVoteComment({ threadId, commentId })
-    } catch(error) {
+    } catch (error) {
       dispatch(toggleUpCommentActionCreator({ threadId, commentId, userId: authUser.id }))
       return {
         status: false,
@@ -310,15 +309,14 @@ function asyncToggleUpCommentThread({ threadId, commentId }) {
   }
 }
 
-function asyncToggleDownCommentThread({ threadId, commentId }) {
-  
-  return async(dispatch, getState) => {
+function asyncToggleDownCommentThread ({ threadId, commentId }) {
+  return async (dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleDownCommentActionCreator({ threadId, commentId, userId: authUser.id }))
     dispatch(showLoading())
     try {
       await downVoteComment({ threadId, commentId })
-    } catch(error) {
+    } catch (error) {
       dispatch(toggleDownCommentActionCreator({ threadId, commentId }))
       return {
         status: false,
@@ -330,15 +328,15 @@ function asyncToggleDownCommentThread({ threadId, commentId }) {
   }
 }
 
-function asyncToggleNeutralizeCommentThread({ threadId, commentId }) {
-  return async(dispatch, getState) => {
+function asyncToggleNeutralizeCommentThread ({ threadId, commentId }) {
+  return async (dispatch, getState) => {
     const { authUser } = getState()
     dispatch(toggleNeutralizeCommentActionCreator({ threadId, commentId, userId: authUser.id }))
     dispatch(showLoading())
 
     try {
       await neutralizeVoteComment({ threadId, commentId })
-    } catch(error) {
+    } catch (error) {
       dispatch(toggleNeutralizeCommentActionCreator({ threadId, commentId, userId: authUser.id }))
       return {
         status: false,
@@ -350,10 +348,10 @@ function asyncToggleNeutralizeCommentThread({ threadId, commentId }) {
   }
 }
 
-function unsetSelectTopics() {
+function unsetSelectTopics () {
   return (dispatch) => {
     dispatch(unsetSelectTopicsActionCreator())
   }
 }
 
-export { receiveThreadsActionCreator, addThreadsActionCreator, asyncAddThreads, asyncReceiveThreads, asyncDetailThread, ActionType, asyncToggleUpVoteThread, asyncToggleDownVoteThread,asyncToggleNeutralizeVoteThread, addCommentActionCreator, asyncAddComment, asyncToggleUpCommentThread, asyncToggleDownCommentThread, asyncToggleNeutralizeCommentThread, toggleUpCommentActionCreator, toggleDownCommentActionCreator, toggleNeutralizeCommentActionCreator, setSelectTopics, setAvailableTopics, unsetSelectTopicsActionCreator, unsetSelectTopics }
+export { receiveThreadsActionCreator, addThreadsActionCreator, asyncAddThreads, asyncReceiveThreads, asyncDetailThread, ActionType, asyncToggleUpVoteThread, asyncToggleDownVoteThread, asyncToggleNeutralizeVoteThread, addCommentActionCreator, asyncAddComment, asyncToggleUpCommentThread, asyncToggleDownCommentThread, asyncToggleNeutralizeCommentThread, toggleUpCommentActionCreator, toggleDownCommentActionCreator, toggleNeutralizeCommentActionCreator, setSelectTopics, setAvailableTopics, unsetSelectTopicsActionCreator, unsetSelectTopics }

@@ -1,13 +1,13 @@
 import axios from 'axios'
 import ENDPOINTS from './endpoints'
 
-async function login({ email, password }) {
+async function login ({ email, password }) {
   try {
     return await axios.post(
       ENDPOINTS.auth.login(),
       {
-        email: email,
-        password: password
+        email,
+        password
       },
       {
         headers: {
@@ -20,7 +20,7 @@ async function login({ email, password }) {
   }
 }
 
-async function register({ name, email, password }) {
+async function register ({ name, email, password }) {
   try {
     return await axios.post(
       ENDPOINTS.auth.register(),

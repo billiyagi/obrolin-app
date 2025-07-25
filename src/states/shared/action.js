@@ -1,29 +1,27 @@
 import { getAllThreads } from '../../api/threads'
 import { getAllUsers } from '../../api/user'
 import { receiveUserActionCreator } from '../user/action'
-import { receiveThreadsActionCreator } from '../threads/action'
-import { setAvailableTopics } from '../threads/action'
+import { receiveThreadsActionCreator, setAvailableTopics } from '../threads/action'
 import { showLoading, hideLoading } from '@dimasmds/react-redux-loading-bar'
 
-function asyncPopulateThreadsAndUsers() {
-  return async(dispatch) => {
+function asyncPopulateThreadsAndUsers () {
+  return async (dispatch) => {
     dispatch(showLoading())
     try {
       const threads = await getAllThreads()
       const users = await getAllUsers()
 
-      /** 
+      /**
        * Combine threads data with Users
       */
       const result = threads.data.data.threads.map((thread) => {
         return {
           ...thread,
-          user: users.data.data.users.find((user) => user.id == thread.ownerId),
+          user: users.data.data.users.find((user) => user.id === thread.ownerId)
         }
       })
 
-
-      /** 
+      /**
        * Get only Topics Data without duplicate
       */
       const topics = threads.data.data.threads.reduce((acc, thread) => {

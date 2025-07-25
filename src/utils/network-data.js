@@ -1,18 +1,19 @@
+/* global localStorage */
 import axios from 'axios'
 
-function putAccessToken(token) {
+function putAccessToken (token) {
   localStorage.setItem('accessToken', token)
 }
 
-function removeAccessToken() {
+function removeAccessToken () {
   localStorage.removeItem('accessToken')
 }
 
-function getAccessToken() {
+function getAccessToken () {
   return localStorage.getItem('accessToken') || ''
 }
 
-async function fetchWithAuth({ url, method, data, options = {} }) {
+async function fetchWithAuth ({ url, method, data, options = {} }) {
   try {
     return await axios({
       url,

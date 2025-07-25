@@ -5,26 +5,26 @@ import { showLoading, hideLoading } from '@dimasmds/react-redux-loading-bar'
 
 const ActionType = {
   SET_AUTH_USER: 'SET_AUTH_USER',
-  UNSET_AUTH_USER: 'UNSET_AUTH_USER',
+  UNSET_AUTH_USER: 'UNSET_AUTH_USER'
 }
 
-function setAuthUserActionCreator(authUser) {
+function setAuthUserActionCreator (authUser) {
   return {
     type: ActionType.SET_AUTH_USER,
     payload: {
-      authUser,
-    },
+      authUser
+    }
   }
 }
 
-function unsetAuthUserActionCreator() {
+function unsetAuthUserActionCreator () {
   return {
-    type: ActionType.UNSET_AUTH_USER,
+    type: ActionType.UNSET_AUTH_USER
   }
 }
 
-function asyncSetAuthUser({ email, password }) {
-  return async(dispatch) => {
+function asyncSetAuthUser ({ email, password }) {
+  return async (dispatch) => {
     dispatch(showLoading())
     try {
       const response = await login({ email, password })
@@ -39,11 +39,11 @@ function asyncSetAuthUser({ email, password }) {
     }
   }
 }
-function asyncUnsetAuthUser() {
+function asyncUnsetAuthUser () {
   return (dispatch) => {
     dispatch(unsetAuthUserActionCreator())
     putAccessToken('')
   }
 }
 
-export { ActionType,setAuthUserActionCreator, unsetAuthUserActionCreator, asyncSetAuthUser, asyncUnsetAuthUser }
+export { ActionType, setAuthUserActionCreator, unsetAuthUserActionCreator, asyncSetAuthUser, asyncUnsetAuthUser }

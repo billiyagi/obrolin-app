@@ -5,7 +5,7 @@ import Button from './ui/Button'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router'
 
-export default function LogoutButton() {
+export default function LogoutButton () {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -27,6 +27,6 @@ export default function LogoutButton() {
   }
 
   return (
-    <Button rounded='full' title="Logout" onClick={onLogout}><TbLogout className='text-3xl'/></Button>
+    <Button rounded='full' title='Logout' onClick={onLogout}><TbLogout className='text-3xl' /></Button>
   )
 }

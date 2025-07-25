@@ -5,16 +5,15 @@ import Dislikes from './Dislikes'
 import Replies from './Replies'
 import { Dot } from 'lucide-react'
 import UserAvatatar from '../UserAvatatar'
-import { postedAt } from '../../utils'
-import { shortText } from '../../utils'
+import { postedAt, shortText } from '../../utils'
 
-export default function ThreadItem({ id, title, body, topic, createdAt, upVotes, downVotes, user, totalComments, onUpVote, authUser, onDownVote, onNeutralize }) {
+export default function ThreadItem ({ id, title, body, topic, createdAt, upVotes, downVotes, user, totalComments, onUpVote, authUser, onDownVote, onNeutralize }) {
   const isThreadUpVoted = upVotes?.includes(authUser.id)
   const isThreadDownVoted = downVotes?.includes(authUser.id)
 
   return (
     <article className='rounded-lg py-5 px-5 bg-white shadow mb-5'>
-      <UserAvatatar avatar={user.avatar} name={user.name}/>
+      <UserAvatatar avatar={user.avatar} name={user.name} />
 
       <div className='my-5'>
         <Link to={`/detail/${id}`} className='font-semibold text-2xl'>{title}</Link>
@@ -23,16 +22,16 @@ export default function ThreadItem({ id, title, body, topic, createdAt, upVotes,
 
       <div className='flex justify-between text-gray-500'>
         <div className='flex '>
-          <Topic name={topic}/>
+          <Topic name={topic} />
           <Dot />
           <p>{postedAt(createdAt)}</p>
         </div>
 
         <div className='flex items-center gap-5'>
-          <Likes likes={upVotes} onClick={() => isThreadUpVoted ? onNeutralize(id) : onUpVote(id)} isLiked={isThreadUpVoted}/>
-          <Dislikes dislikes={downVotes} onClick={() => isThreadDownVoted ? onNeutralize(id) : onDownVote(id)} isDisliked={isThreadDownVoted}/>
-            
-          <Replies totalComments={totalComments}/>
+          <Likes likes={upVotes} onClick={() => isThreadUpVoted ? onNeutralize(id) : onUpVote(id)} isLiked={isThreadUpVoted} />
+          <Dislikes dislikes={downVotes} onClick={() => isThreadDownVoted ? onNeutralize(id) : onDownVote(id)} isDisliked={isThreadDownVoted} />
+
+          <Replies totalComments={totalComments} />
         </div>
       </div>
     </article>

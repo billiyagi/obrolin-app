@@ -18,7 +18,7 @@ const store = configureStore({
     topics: topicsReducer,
     leaderboards: leaderboardsReducer,
     loadingBar: loadingBarReducer
-  },
+  }
 })
 
 export default store

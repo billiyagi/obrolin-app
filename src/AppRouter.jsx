@@ -11,8 +11,7 @@ import { asyncPreloadProcess } from './states/isPreload/action'
 import GuestRoute from './routes/GuestRoute'
 import ProtectedRoute from './routes/ProtectedRoute'
 
-export default function AppRouter() {
-
+export default function AppRouter () {
   const authUser = useSelector((state) => state.authUser)
   const isPreload = useSelector((state) => state.isPreload)
 
@@ -22,31 +21,29 @@ export default function AppRouter() {
     dispatch(asyncPreloadProcess())
   }, [dispatch])
 
-
-  if(isPreload) {
+  if (isPreload) {
     return null
   }
 
-  if(authUser == null) {
+  if (authUser == null) {
     return (
       <Routes>
-        <Route element={<GuestRoute authUser={authUser}/>}>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+        <Route element={<GuestRoute authUser={authUser} />}>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
     )
   }
 
-
   return (
     <Routes>
-      <Route element={<ProtectedRoute authUser={authUser}/>}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/create" element={<CreateThreadPage />} />
-        <Route path="/detail/:id" element={<DetailThreadPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+      <Route element={<ProtectedRoute authUser={authUser} />}>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/create' element={<CreateThreadPage />} />
+        <Route path='/detail/:id' element={<DetailThreadPage />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Route>
     </Routes>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Topic({ name }) {
+export default function Topic ({ name }) {
   return (
     <div className='font-semibold'>
-	  #{name}
+      #{name}
     </div>
   )
 }

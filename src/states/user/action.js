@@ -5,26 +5,26 @@ const ActionType = {
   RECEIVE_USER: 'RECEIVE_USER'
 }
 
-function receiveUserActionCreator(user) {
+function receiveUserActionCreator (user) {
   return {
     type: ActionType.RECEIVE_USER,
     payload: {
-      user,
-    },
+      user
+    }
   }
 }
 
-function setUserRegister(user) {
+function setUserRegister (user) {
   return {
     type: ActionType.REGISTER_USER,
     payload: {
-      user,
-    },
+      user
+    }
   }
 }
 
-function asyncRegisterUser({ name, email, password }) {
-  return async(dispatch) => {
+function asyncRegisterUser ({ name, email, password }) {
+  return async (dispatch) => {
     try {
       const user = await register({ name, email, password })
       dispatch(setUserRegister(user))

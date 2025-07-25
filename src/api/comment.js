@@ -1,7 +1,7 @@
 import ENDPOINTS from './endpoints'
 import { fetchWithAuth } from '../utils/network-data'
 
-async function createComment({ content, threadId }) {
+async function createComment ({ content, threadId }) {
   return await fetchWithAuth({
     url: ENDPOINTS.comments.create(threadId),
     method: 'POST',
@@ -9,24 +9,24 @@ async function createComment({ content, threadId }) {
   })
 }
 
-async function upVoteComment({ threadId, commentId }) {
+async function upVoteComment ({ threadId, commentId }) {
   return await fetchWithAuth({
     url: ENDPOINTS.votes.comment.up(threadId, commentId),
-    method: 'POST',
+    method: 'POST'
   })
 }
 
-async function downVoteComment({ threadId, commentId }) {
+async function downVoteComment ({ threadId, commentId }) {
   return await fetchWithAuth({
     url: ENDPOINTS.votes.comment.down(threadId, commentId),
-    method: 'POST',
+    method: 'POST'
   })
 }
 
-async function neutralizeVoteComment({ threadId, commentId }) {
+async function neutralizeVoteComment ({ threadId, commentId }) {
   return await fetchWithAuth({
     url: ENDPOINTS.votes.comment.neutral(threadId, commentId),
-    method: 'POST',
+    method: 'POST'
   })
 }
 
