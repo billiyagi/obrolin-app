@@ -8,10 +8,14 @@
 
 describe('template spec', () => {
   beforeEach(() => {
+    cy.intercept('https://forum-api.dicoding.dev/v1/**').as('apiCall')
     cy.visit('http://localhost:5173/')
   })
 
   it('Should display alert when data thread is empty', () => {
+    // tunggu auth me API selesai
+    cy.wait('@apiCall', { timeout: 20000 })
+
     // mengisi credential
     cy.get('input[type="Email"]').type('asdffa@gmail.com')
     cy.get('input[type="Password"]').type('root1233')
@@ -19,7 +23,8 @@ describe('template spec', () => {
     // klik tombol login
     cy.get('button').contains(/^Login$/).click()
 
-    cy.wait(20000) // tunggu 2 detik
+    // tunggu login API selesai
+    cy.wait('@apiCall', { timeout: 20000 })
 
     // memverifikasi apakah dapat muncul halaman home
     cy.get('header').should('be.visible')
@@ -30,7 +35,8 @@ describe('template spec', () => {
     // submit ngobrol
     cy.get('button[type="submit"]').click()
 
-    cy.wait(2000) // tunggu 2 detik
+    // tunggu validasi/response jika ada API
+    cy.wait('@apiCall', { timeout: 20000 })
 
     // memverifikasi apakah alert muncul ketika mengisi konten tanpa data
     cy.get('p[data-testid="title-thread"]').should('be.visible').and('have.text', 'Judul wajib diisi')
@@ -39,7 +45,8 @@ describe('template spec', () => {
   })
 
   it('Create Thread when all data needed is filled', () => {
-    cy.wait(20000) // tunggu 20 detik
+    // tunggu auth me API selesai
+    cy.wait('@apiCall', { timeout: 20000 })
 
     // mengisi credential
     cy.get('input[type="Email"]').type('asdffa@gmail.com')
@@ -48,7 +55,8 @@ describe('template spec', () => {
     // klik tombol login
     cy.get('button').contains(/^Login$/).click()
 
-    cy.wait(20000) // tunggu 20 detik request login
+    // tunggu login API selesai
+    cy.wait('@apiCall', { timeout: 20000 })
 
     // memverifikasi apakah dapat muncul halaman home
     cy.get('header').should('be.visible')
@@ -67,7 +75,8 @@ describe('template spec', () => {
     // submit ngobrol
     cy.get('button[type="submit"]').click()
 
-    cy.wait(20000) // tunggu 20 detik request login
+    // tunggu API create thread selesai
+    cy.wait('@apiCall', { timeout: 20000 })
 
     // memverifikasi apakah alert muncul ketika thread berhasil disimpan
     cy.get('div[id="swal2-html-container"]').should('be.visible').and('have.text', 'Thread Successfully Created')
