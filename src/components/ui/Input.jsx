@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function Input ({
   type,
@@ -10,16 +10,19 @@ export default function Input ({
   onChange,
   ...props
 }) {
-  const inputElement = (
-    <input
-      type={type}
-      className={`input ${className}`}
-      value={value}
-      onChange={onChange}
-      id={id}
-      {...props}
-    />
-  )
+  const inputProps = {
+    type,
+    className: `input ${className}`,
+    id,
+    onChange,
+    ...props
+  }
+
+  if (value !== undefined) {
+    inputProps.value = value // ✅ hanya set jika ada value
+  }
+
+  const inputElement = <input {...inputProps} />
 
   return (
     <div>
@@ -35,4 +38,14 @@ export default function Input ({
           )}
     </div>
   )
+}
+
+Input.propTypes = {
+  type: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  isLabel: PropTypes.bool,
+  label: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
+  onChange: PropTypes.func // ✅ tidak lagi isRequired
 }

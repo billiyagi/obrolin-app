@@ -1,20 +1,38 @@
 import Button from '../ui/Button'
 import { HiArrowLongRight } from 'react-icons/hi2'
-import useInput from '../../hooks/useInput'
+import { useForm } from 'react-hook-form'
 
 export default function CommentForm ({ onCreateComment, threadId }) {
-  const [content, handleChange, setContent] = useInput('')
-  const onSubmit = () => {
-    setContent('')
-    onCreateComment(content, threadId)
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    defaultValues: {
+      content: ''
+    }
+  })
+
+  const onSubmit = (data) => {
+    onCreateComment(data.content, threadId)
+    reset() // reset form setelah submit
   }
+
   return (
-    <div className='bg-white rounded-lg shadow p-5'>
+    <form onSubmit={handleSubmit(onSubmit)} className='bg-white rounded-lg shadow p-5'>
       <div className='font-semibold text-lg mb-3'>Beri Komentar</div>
-      <textarea value={content} onChange={handleChange} className='textarea h-30' rows='4' cols='40' />
+
+      <textarea
+        {...register('content', { required: 'Komentar tidak boleh kosong' })}
+        className='textarea h-30'
+        rows='4'
+        cols='40'
+      />
+      {errors.content && <p className='text-red-500 text-sm'>{errors.content.message}</p>}
+
       <div className='flex justify-end mt-5'>
-        <Button onClick={onSubmit}><div className='flex items-center gap-3'>Kirim <HiArrowLongRight className='text-2xl' /></div></Button>
+        <Button type='submit'>
+          <div className='flex items-center gap-3'>
+            Kirim <HiArrowLongRight className='text-2xl' />
+          </div>
+        </Button>
       </div>
-    </div>
+    </form>
   )
 }

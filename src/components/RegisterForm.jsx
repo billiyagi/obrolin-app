@@ -1,22 +1,36 @@
 import Input from './ui/Input'
 import Button from './ui/Button'
 import { Link } from 'react-router'
-import useInput from '../hooks/useInput'
+import { useForm } from 'react-hook-form'
 
 export default function RegisterForm ({ handleRegister }) {
-  const [name, setName] = useInput('')
-  const [email, setEmail] = useInput('')
-  const [password, setPassword] = useInput('')
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: ''
+    }
+  })
+
+  const onSubmit = (data) => {
+    handleRegister(data)
+  }
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className='mb-5 text-2xl font-semibold'>Register new account</div>
-      <Input className='mb-3' label='Nama' id='name' type='name' value={name} onChange={setName} />
-      <Input className='mb-3' label='Email' id='email' type='email' value={email} onChange={setEmail} />
-      <Input className='mb-5' label='Password' id='password' type='password' value={password} onChange={setPassword} />
+      <Input className='mb-3' label='Nama' id='name' type='name' {...register('name', { required: 'Nama wajib diisi' })} />
+      {errors.name && <p className='text-red-500 text-sm'>{errors.name.message}</p>}
+
+      <Input className='mb-3' label='Email' id='email' type='email' {...register('email', { required: 'Email wajib diisi' })} />
+      {errors.email && <p className='text-red-500 text-sm'>{errors.email.message}</p>}
+
+      <Input className='mb-5' label='Password' id='password' type='password' {...register('password', { required: 'Password wajib diisi' })} />
+      {errors.password && <p className='text-red-500 text-sm'>{errors.password.message}</p>}
+
       <div className='flex justify-between items-center'>
         <div>Sudah punya akun? <Link to='/login' className='text-blue-600'>Login disini</Link></div>
-        <Button onClick={() => handleRegister({ name, email, password })}>Register</Button>
+        <Button type='submit'>Register</Button>
       </div>
-    </>
+    </form>
   )
 }

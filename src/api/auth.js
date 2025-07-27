@@ -2,6 +2,7 @@ import axios from 'axios'
 import ENDPOINTS from './endpoints'
 
 async function login ({ email, password }) {
+  console.log(email, password)
   try {
     return await axios.post(
       ENDPOINTS.auth.login(),

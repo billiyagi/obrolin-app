@@ -1,6 +1,7 @@
 import clsx from 'clsx'
+import PropTypes from 'prop-types'
 
-export default function Button ({ children, isLoading, rounded = 'default', title, className, ...props }) {
+const Button = ({ children, isLoading, rounded = 'default', title, className, ...props }) => {
   const Loader = ({ children }) => (
     <div className='button-loading'>
       <span className='loader inline-block' />
@@ -15,4 +16,21 @@ export default function Button ({ children, isLoading, rounded = 'default', titl
       {isLoading ? <Loader>{children}</Loader> : <>{children}</>}
     </button>
   )
+}
+
+export default Button
+
+Button.propTypes = {
+  /** Konten di dalam button */
+  children: PropTypes.node.isRequired,
+  /** Status loading */
+  isLoading: PropTypes.bool,
+  /** Bentuk button */
+  rounded: PropTypes.oneOf(['default', 'full']),
+  /** Tooltip/title untuk button */
+  title: PropTypes.string,
+  /** Class tambahan */
+  className: PropTypes.string,
+  /** Handler klik */
+  onClick: PropTypes.func
 }

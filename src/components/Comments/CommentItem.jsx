@@ -1,5 +1,5 @@
 import React from 'react'
-import Avatar from '../Avatar'
+import Avatar from '../ui/Avatar'
 import Dislikes from '../Threads/Dislikes'
 import Likes from '../Threads/Likes'
 import { postedAt } from '../../utils'

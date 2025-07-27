@@ -1,4 +1,4 @@
-import Avatar from './Avatar'
+import Avatar from './ui/Avatar'
 
 export default function UserAvatatar ({ name, avatar }) {
   return (
