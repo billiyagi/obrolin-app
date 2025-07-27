@@ -1,3 +1,8 @@
+/**
+ * Skenario Pengujian:
+ * 1. Komponen Input harus dirender dengan label dan nilai yang diberikan.
+ * 2. Komponen Input harus memanggil onChange ketika pengguna mengetik.
+ */
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import Input from '../../src/components/ui/Input'

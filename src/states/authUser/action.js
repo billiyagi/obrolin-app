@@ -32,8 +32,17 @@ function asyncSetAuthUser ({ email, password }) {
       const authUser = await getOwnProfile()
 
       dispatch(setAuthUserActionCreator(authUser.data.data.user))
+
+      return {
+        status: true,
+        message: 'Successfully Login'
+      }
     } catch (error) {
       console.log(error)
+      return {
+        status: false,
+        message: error.message
+      }
     } finally {
       dispatch(hideLoading())
     }

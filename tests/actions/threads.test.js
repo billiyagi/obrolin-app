@@ -1,3 +1,15 @@
+/**
+ * Skenario Pengujian:
+ * - asyncReceiveThreads:
+ *   - Harus dispatch RECEIVE_THREADS saat sukses.
+ * - asyncAddThreads:
+ *   - Harus dispatch ADD_THREAD saat sukses.
+ *   - Harus meng-handle error jika gagal.
+ * - asyncAddComment:
+ *   - Harus dispatch ADD_COMMENT saat sukses.
+ * - asyncToggleUpVoteThread:
+ *   - Harus dispatch TOGGLE_UP_VOTE_THREAD dengan benar.
+ */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import {
   asyncReceiveThreads,

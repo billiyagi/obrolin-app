@@ -27,6 +27,6 @@ export default function LogoutButton () {
   }
 
   return (
-    <Button rounded='full' title='Logout' onClick={onLogout}><TbLogout className='text-3xl' /></Button>
+    <Button rounded='full' title='Logout' data-testid='logout-button' onClick={onLogout}><TbLogout className='text-3xl' /></Button>
   )
 }

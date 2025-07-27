@@ -1,3 +1,10 @@
+/**
+ * Skenario Pengujian userReducer:
+ *
+ * 1. Harus mengembalikan state awal ketika tidak ada action yang diberikan.
+ * 2. Harus mengisi user ketika menerima action REGISTER_USER.
+ * 3. Harus mengisi user ketika menerima action RECEIVE_USER.
+ */
 import { describe, it, expect } from 'vitest'
 import userReducer from '../../src/states/user/reducer'
 import { ActionType } from '../../src/states/user/action'

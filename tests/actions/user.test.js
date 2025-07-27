@@ -1,3 +1,10 @@
+/**
+ * Skenario Pengujian:
+ * - asyncRegisterUser thunk:
+ *   - Harus dispatch REGISTER_USER saat API sukses.
+ *   - Harus mengembalikan error message saat API gagal.
+ */
+
 import { describe, it, expect, vi } from 'vitest'
 import { asyncRegisterUser, setUserRegister } from '../../src/states/user/action'
 import * as authApi from '../../src/api/auth'

@@ -1,3 +1,11 @@
+/**
+ * Skenario Pengujian:
+ * - receiveLeaderboardsActionCreator:
+ *   - Harus membuat action dengan type RECEIVE_LEADERBOARDS.
+ * - asyncReceiveLeaderboards:
+ *   - Harus dispatch leaderboards saat sukses.
+ *   - Harus handle error tanpa dispatch RECEIVE_LEADERBOARDS.
+ */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { asyncReceiveLeaderboards, receiveLeaderboardsActionCreator, ActionType } from '../../src/states/leaderboards/action'
 import { getAllLeaderboards } from '../../src/api/leaderboards'

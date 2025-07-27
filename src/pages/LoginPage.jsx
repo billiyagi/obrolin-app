@@ -3,12 +3,20 @@ import Layout from '../Layout'
 import { useDispatch } from 'react-redux'
 import { asyncSetAuthUser } from '../states/authUser/action'
 import LoginForm from '../components/LoginForm'
+import Swal from 'sweetalert2'
 
 export default function LoginPage () {
   const dispatch = useDispatch()
 
-  const handleLogin = ({ email, password }) => {
-    dispatch(asyncSetAuthUser({ email, password }))
+  const handleLogin = async ({ email, password }) => {
+    const auth = await dispatch(asyncSetAuthUser({ email, password }))
+    if (!auth.status) {
+      Swal.fire({
+        title: 'Failed to Login',
+        text: auth.message,
+        icon: 'error'
+      })
+    }
   }
 
   return (

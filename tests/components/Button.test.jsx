@@ -1,3 +1,9 @@
+/**
+ * Skenario Pengujian Button Component:
+ * 1. Menampilkan teks children dengan benar.
+ * 2. Memanggil fungsi onClick ketika button diklik.
+ * 3. Menampilkan loader dan menonaktifkan button ketika isLoading bernilai true.
+ */
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import Button from '../../src/components/ui/Button'
 import { describe, it, expect, vi, afterEach } from 'vitest'

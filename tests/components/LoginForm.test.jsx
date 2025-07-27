@@ -1,3 +1,8 @@
+/**
+ * Skenario Pengujian LoginForm Component:
+ * 1. Menampilkan input email dan password ketika komponen dirender.
+ * 2. Memanggil fungsi handleLogin dengan email dan password yang dimasukkan ketika form login disubmit.
+ */
 import { render, screen, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LoginForm from '../../src/components/LoginForm'

@@ -1,3 +1,12 @@
+/**
+ * Skenario Pengujian threadsReducer:
+ *
+ * 1. Harus mengembalikan state awal ketika tidak ada action yang diberikan.
+ * 2. Harus mengisi threads ketika menerima action RECEIVE_THREADS.
+ * 3. Harus menambahkan komentar baru pada detail thread ketika menerima action ADD_COMMENT.
+ * 4. Harus toggle upvote pada daftar thread ketika menerima action TOGGLE_UP_VOTE_THREAD.
+ * 5. Harus toggle downvote pada komentar ketika menerima action TOGGLE_DOWN_VOTE_COMMENT.
+ */
 import { describe, it, expect } from 'vitest'
 import threadsReducer from '../../src/states/threads/reducer'
 import { ActionType } from '../../src/states/threads/action'

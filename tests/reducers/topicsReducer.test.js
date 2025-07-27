@@ -1,3 +1,11 @@
+/**
+ * Skenario Pengujian topicsReducer:
+ *
+ * 1. Harus mengembalikan state awal ketika tidak ada action yang diberikan.
+ * 2. Harus mengisi daftar topics ketika menerima action SET_AVAILABLE_TOPICS.
+ * 3. Harus memilih salah satu topic ketika menerima action SET_SELECT_TOPIC dan menandai hanya satu yang terpilih.
+ * 4. Harus meng-unselect semua topic ketika menerima action UNSET_SELECT_TOPIC.
+ */
 import { describe, it, expect } from 'vitest'
 import topicsReducer from '../../src/states/threads/topicsReducer'
 import { ActionType } from '../../src/states/threads/action'

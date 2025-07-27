@@ -1,3 +1,8 @@
+/**
+ * Skenario Pengujian Avatar Component:
+ * 1. Menampilkan avatar berdasarkan nama ketika prop image tidak diberikan.
+ * 2. Menampilkan custom image ketika prop image diberikan.
+ */
 import { render, screen } from '@testing-library/react'
 import Avatar from '../../src/components/ui/Avatar'
 import { describe, it, expect } from 'vitest'

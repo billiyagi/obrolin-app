@@ -30,7 +30,7 @@ export default function CreateThreadForm ({ onCreateThread }) {
         id='title'
         {...register('title', { required: 'Judul wajib diisi' })}
       />
-      {errors.title && <p className='text-red-500 text-sm'>{errors.title.message}</p>}
+      {errors.title && <p className='text-red-500 text-sm' data-testid='title-thread'>{errors.title.message}</p>}
 
       <Input
         className='mb-3'
@@ -39,7 +39,7 @@ export default function CreateThreadForm ({ onCreateThread }) {
         id='category'
         {...register('category', { required: 'Kategori wajib diisi' })}
       />
-      {errors.category && <p className='text-red-500 text-sm'>{errors.category.message}</p>}
+      {errors.category && <p className='text-red-500 text-sm' data-testid='category-thread'>{errors.category.message}</p>}
 
       <div>
         <label htmlFor='body' className='text-sm font-medium text-gray-700 mb-2 inline-block'>
@@ -52,7 +52,7 @@ export default function CreateThreadForm ({ onCreateThread }) {
           cols='40'
           {...register('body', { required: 'Isi obrolan wajib diisi' })}
         />
-        {errors.body && <p className='text-red-500 text-sm'>{errors.body.message}</p>}
+        {errors.body && <p className='text-red-500 text-sm' data-testid='body-thread'>{errors.body.message}</p>}
       </div>
 
       <div className='flex justify-end mt-5'>

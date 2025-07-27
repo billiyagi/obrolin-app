@@ -1,3 +1,11 @@
+/**
+ * Skenario Pengujian:
+ * - setIsPreloadActionCreator:
+ *   - Harus membuat action dengan payload isPreload.
+ * - asyncPreloadProcess:
+ *   - Harus dispatch authUser saat sukses.
+ *   - Harus handle error dan set authUser ke null.
+ */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { asyncPreloadProcess, setIsPreloadActionCreator, ActionType } from '../../src/states/isPreload/action'
 import { setAuthUserActionCreator } from '../../src/states/authUser/action'

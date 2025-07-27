@@ -15,7 +15,7 @@ export default function Aside ({ isBack = false }) {
               <HiMiniArrowLeft className='text-3xl' />
             </Button>
           </Link>}
-        <Link title='Create Thread' to='/create'>
+        <Link title='Create Thread' to='/create' data-testid='create-thread-button'>
           <Button rounded='full' title='Create Threads'>
             <HiOutlinePlus className='text-3xl' />
           </Button>

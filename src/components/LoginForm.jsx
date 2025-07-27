@@ -18,10 +18,10 @@ export default function LoginForm ({ handleLogin }) {
     <form onSubmit={handleSubmit(onSubmit)} data-testid='login-form'>
       <div className='mb-5 text-2xl font-semibold'>Login to your account</div>
       <Input className='mb-3' label='Email' id='email' type='email' {...register('email', { required: 'Email wajib diisi' })} />
-      {errors.email && <p className='text-red-500 text-sm'>{errors.email.message}</p>}
+      {errors.email && <p className='text-red-500 text-sm' data-testid='alert-email'>{errors.email.message}</p>}
 
       <Input className='mb-5' label='Password' id='password' type='password' {...register('password', { required: 'Password wajib diisi' })} />
-      {errors.password && <p className='text-red-500 text-sm'>{errors.password.message}</p>}
+      {errors.password && <p className='text-red-500 text-sm' data-testid='alert-password'>{errors.password.message}</p>}
 
       <div className='flex justify-between items-center'>
         <div>Tidak punya akun? <Link to='/register' className='text-blue-600'>Daftar disini</Link></div>
